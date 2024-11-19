@@ -1,0 +1,22 @@
+.n {
+  color: black;
+  text-decoration: none;
+}
+
+.n:hover {
+  color: rgb(141, 141, 141);
+}
+
+nav {
+  background-color: white;
+}
+
+.navbar-toggler {
+  background-color: rgb(255, 224, 48);
+}
+
+.main-body {
+  margin-left: 2cm;
+  margin-top: 3.5cm;
+  margin-right: 2cm;
+}
