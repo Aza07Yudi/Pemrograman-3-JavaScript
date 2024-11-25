@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sistem Login</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div
+      class="card text-center"
+      style="margin-top: 2cm; margin-left: 10cm; margin-right: 10cm"
+    >
+      <div class="card-header"><h1>Login Form</h1></div>
+      <div class="card-body">
+        <form id="loginForm">
+          <label>Username</label>
+          <br />
+          <input type="text" id="username" />
+          <br /><br />
+          <label>Password</label><br />
+          <input type="text" id="password" />
+          <br />
+          <br />
+          <input type="submit" value="Log In" class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+    <div id="responseMessage"></div>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          /* Fungsi preventDefault() digunakan untuk menghilangkan
+            habit atau kebiasaan dari seperti reload otomatis
+            */
+          event.preventDefault();
+
+          //ambil nilai Username & Password
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          //Panggil Library http request
+          const xhr = new XMLHttpRequest();
+
+          //Tentukan URL atau endpoint Login
+          const url = "https://dummyjson.com/auth/login";
+
+          //Konfigurasi Request
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+
+          //Prepare data yang akan dikirim
+          const data = `username=${encodeURIComponent(
+            username
+          )}&password=${encodeURIComponent(password)}`;
+
+          //Kirim data
+          xhr.send(data);
+
+          //Function Load Data
+          xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              document.getElementById("responseMessage").innerText =
+                xhr.statusText;
+              localStorage.setItem("isloggedin", "true");
+              window.location.href = "dashboard.html";
+            } else {
+              document.getElementById("responseMessage").innerText =
+                xhr.statusText;
+            }
+          };
+        });
+    </script>
+  </body>
+</html>
