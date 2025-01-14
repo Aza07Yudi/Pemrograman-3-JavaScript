@@ -1,0 +1,5 @@
+@include('navadmin')
+      
+    
+@include ('footadmin')
+ 
